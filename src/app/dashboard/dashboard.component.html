@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <div class="row mb-5">
+    <div class="col-md-6">
+      <app-search (searchcriteria)="searchThis($event)"></app-search>
+    </div>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Project Name</th>
+        <th scope="col">Customer Name</th>
+        <th scope="col">Status</th>
+        <th scope="col">Due</th>
+        <th scope="col">Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let customer of filteredCustomers"
+        routerLink="customers/customer-detail/{{customer.id}}">
+        <td>{{customer.projectname}}</td>
+        <td>{{customer.customername}}</td>
+        <td>{{customer.status}}</td>
+        <td>{{customer.date}}</td>
+        <td><i class="fa fa-arrow-circle-right"></i></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
