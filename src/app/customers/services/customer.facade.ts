@@ -39,4 +39,8 @@ export class CustomerFacade {
   public addCustomer(customer: Customer): void {
     this.store.dispatch(addCustomer({customer}))
   }
+
+  public findCustomer(id): Observable<Customer> {
+    return this.store.select('customers').pipe(map(state => state.list.results.find(lead => lead.id == id)));
+  }
 }

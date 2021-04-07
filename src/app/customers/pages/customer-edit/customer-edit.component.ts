@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { CustomerFacade } from '~customers/services/customer.facade';
 import { Countries } from '~types/countries';
 import { Country } from '~types/country';
@@ -26,15 +27,18 @@ export class CustomerEditPageComponent implements OnInit {
               private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this.id = +params.id;
-    });
-    this.store.getCustomers().subscribe(customers => {
-      this.customers = customers;
-    })
-    this.customer = this.customers.find(customer => {
-      return customer.id === this.id
-    })
+    // this.route.params.subscribe((params: Params) => {
+    //   this.id = +params.id;
+    // });
+    // this.store.getCustomers().subscribe(customers => {
+    //   this.customers = customers;
+    // })
+    // this.customer = this.customers.find(customer => {
+    //   return customer.id === this.id
+    // })
+    this.route.params.pipe(
+      switchMap((params: Params) => this.store.findCustomer(params.id))
+    ).subscribe(customer => this.customer = customer);
     this.createForm();
   }
 

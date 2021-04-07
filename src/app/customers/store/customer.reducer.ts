@@ -1,3 +1,4 @@
+import { state } from "@angular/animations";
 import { Action, createReducer, on } from "@ngrx/store";
 
 import { Customer } from "~types/customer";
@@ -35,7 +36,7 @@ export const listReducer = createReducer(
     (state: CustomerListState, { error }: any) => ({
       ...state,
       loading: false,
-      error
+      error: null
     })
   ) as any,
   on(
@@ -62,6 +63,18 @@ export const listReducer = createReducer(
       }
     }
   ) as any,
+  // on(
+  //   getOneCustomerSuccess,
+  //   (state: CustomerListState, { customer }: {customer: Customer}) => {
+  //     return {
+  //       ...state,
+  //       results: state.results.filter(filterCustom => {
+  //         if(filterCustom.id === customer.id) {
+  //           return customer;
+  //         }
+  //       })
+  //     }
+  //   }) as any,
   on(
     addCustomerSuccess,
     (state: CustomerListState, { customer }: {customer: Customer}) => ({

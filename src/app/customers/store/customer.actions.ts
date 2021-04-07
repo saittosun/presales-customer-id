@@ -15,6 +15,9 @@ export enum CustomerActions {
   setCustomers = '[General]: set all customers',
   setCustomersSuccess = '[General]: set all customers success',
   setCustomersFailed = '[General]: set all customers failed',
+  getOneCustomer = '[Customers]: get one customer',
+  getOneCustomerSuccess = '[Customers]: get one customer success',
+  getOneCustomerFailed = '[Customers]: get one customer failed'
 }
 
 export const getCustomers = createAction(CustomerActions.getCustomers);

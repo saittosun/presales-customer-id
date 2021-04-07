@@ -1,3 +1,4 @@
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
@@ -21,13 +22,21 @@ export class CustomerDetailPageComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this.id = +params.id;
-    })
-    this.store.getCustomers().subscribe(customers => {
-      this.customers = customers;
-    })
-    this.customer = this.customers.find(customer => customer.id === +this.id)
+    // const id = this.store.findId(this.id);
+    // console.log(id)
+/////////
+    this.route.params.pipe(
+    switchMap((params: Params) => this.store.findCustomer(params.id))
+  ).subscribe(customer => this.customer = customer);
+  ///////////////
+    // this.route.params.subscribe((params: Params) => {
+    //   this.id = +params.id;
+    // })
+    // this.store.getCustomers().subscribe(customers => {
+    //   this.customers = customers;
+    // })
+    // this.customer = this.customers.find(customer => customer.id === +this.id)
+    // this.route.params.pipe(switchMap((params: Params) => this.store.findCustomer(params.id)))
   }
 
   onEdit() {
