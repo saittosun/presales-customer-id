@@ -48,6 +48,7 @@ export class ProjectsOfCustomerComponent implements OnInit {
   }
 
   onHandleProject() {
+    console.log('clicked');
     const customerName = this.customer.customername;
     this.leadFacade.getLeads().subscribe(projects => {
       projects.forEach(project => {

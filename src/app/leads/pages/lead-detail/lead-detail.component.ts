@@ -36,6 +36,7 @@ export class LeadDetailPageComponent implements OnInit, OnDestroy {
     })
     this.store.getLeads().subscribe(leads => {
       this.leads = leads
+      console.log(this.leads);
     })
     this.lead = this.leads.find(lead => lead.id === this.id),
     this.createStatusResolutionForm();

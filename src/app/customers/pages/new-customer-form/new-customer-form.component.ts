@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 
 import { CustomerFacade } from '~customers/services/customer.facade';
@@ -25,7 +26,8 @@ export class NewCustomerPageComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
               private router: Router,
               private route: ActivatedRoute,
-              private store: CustomerFacade) { }
+              private store: CustomerFacade,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -64,7 +66,7 @@ export class NewCustomerPageComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.submitted = true;
     if (this.leadForm.invalid) {
-      alert('You must fill the required fields!');
+      this.toastr.error('You must fill the required fields!');
       return;
     }
     const customer: Customer = {

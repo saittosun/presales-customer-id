@@ -17,16 +17,9 @@ constructor(private customerService: CustomerService,
             private store: CustomerFacade) { }
 
   ngOnInit(): void {
-    this.store.getCustomers().subscribe(customers => {
-      if(customers.length === 0) {
-        this.customerService.fetchCustomers().subscribe(customers => {
-          this.store.setCustomers(customers);
-          this.customers = customers;
-        });
-      } else {
-        this.customers = customers;
-      }
-    })
+    this.store.getCustomers().subscribe(customers =>
+        this.customers = customers
+    )
   }
 
   ngOnDestroy(): void {

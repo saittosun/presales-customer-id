@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { CustomerFacade } from '~customers/services/customer.facade';
@@ -24,21 +25,22 @@ export class CustomerEditPageComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private store: CustomerFacade,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    // this.route.params.subscribe((params: Params) => {
-    //   this.id = +params.id;
-    // });
-    // this.store.getCustomers().subscribe(customers => {
-    //   this.customers = customers;
-    // })
-    // this.customer = this.customers.find(customer => {
-    //   return customer.id === this.id
-    // })
-    this.route.params.pipe(
-      switchMap((params: Params) => this.store.findCustomer(params.id))
-    ).subscribe(customer => this.customer = customer);
+    this.route.params.subscribe((params: Params) => {
+      this.id = +params.id;
+    });
+    this.store.getCustomers().subscribe(customers => {
+      this.customers = customers;
+    })
+    this.customer = this.customers.find(customer => {
+      return customer.id === this.id
+    })
+    // this.route.params.pipe(
+    //   switchMap((params: Params) => this.store.findCustomer(params.id))
+    // ).subscribe(customer => this.customer = customer);
     this.createForm();
   }
 
@@ -70,7 +72,7 @@ export class CustomerEditPageComponent implements OnInit {
   onEditForm() {
     this.editted = true;
     if (this.leadForm.invalid) {
-      alert('You must fill the required fields!')
+      this.toastr.success('You must fill the required fields!')
       return;
     };
     this.customer = {

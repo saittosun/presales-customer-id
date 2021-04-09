@@ -14,7 +14,7 @@ import { Observable, Subject } from 'rxjs';
 export class CustomerDetailPageComponent implements OnInit {
   private destroyed$ = new Subject<boolean>();
   customers: Customer[];
-  customer: Customer;
+  customer$: Observable<Customer>;
   id: number;
 
   constructor(private store: CustomerFacade,
@@ -22,21 +22,17 @@ export class CustomerDetailPageComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    // const id = this.store.findId(this.id);
-    // console.log(id)
-/////////
-    this.route.params.pipe(
-    switchMap((params: Params) => this.store.findCustomer(params.id))
-  ).subscribe(customer => this.customer = customer);
-  ///////////////
-    // this.route.params.subscribe((params: Params) => {
-    //   this.id = +params.id;
-    // })
-    // this.store.getCustomers().subscribe(customers => {
-    //   this.customers = customers;
-    // })
-    // this.customer = this.customers.find(customer => customer.id === +this.id)
-    // this.route.params.pipe(switchMap((params: Params) => this.store.findCustomer(params.id)))
+    // this.route.params.pipe(
+    // switchMap((params: Params) => this.store
+    //   .findCustomer(params.id)))
+    //   .subscribe(customer => this.customer = customer
+    // )
+    this.customer$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        const selectedId = Number(params.get('id'));
+        return this.store.findCustomer(selectedId);
+      })
+    );
   }
 
   onEdit() {

@@ -19,18 +19,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
               private customerService: CustomerService) { }
 
   ngOnInit(): void {
-    this.store.getCustomers().subscribe(customers => {
-      if(customers.length === 0) {
-        this.customerService.fetchCustomers().subscribe(customers => {
-          this.store.setCustomers(customers);
-          this.customers = customers;
-          this.filteredCustomers = [...this.customers];
-        });
-      } else {
-        this.customers = customers;
-        this.filteredCustomers = [...this.customers];
-      }
-    })
+    this.store.getCustomers().subscribe(customers => this.customers = customers)
+    this.filteredCustomers = [...this.customers];
   }
 
   searchThis(val: string): void {
