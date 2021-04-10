@@ -15,20 +15,19 @@ export class AppComponent implements OnInit, OnDestroy {
   customers: Customer[];
   private destroyed$ = new Subject<boolean>();
 
-  constructor(private customerService: CustomerService,
-              private store: CustomerFacade) { }
+  constructor() { }
 
   ngOnInit(): void {
-     this.store.getCustomers().subscribe(customers => {
-      if(customers.length === 0) {
-        this.customerService.fetchCustomers().subscribe(customers => {
-          this.store.setCustomers(customers);
-          this.customers = customers;
-        });
-      } else {
-        this.customers = customers;
-      }
-    })
+    //  this.store.getCustomers().subscribe(customers => {
+    //   if(customers.length === 0) {
+    //     this.customerService.fetchCustomers().subscribe(customers => {
+    //       this.store.setCustomers(customers);
+    //       this.customers = customers;
+    //     });
+    //   } else {
+    //     this.customers = customers;
+    //   }
+    // })
   }
 
   ngOnDestroy(): void {

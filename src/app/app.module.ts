@@ -19,6 +19,8 @@ import { LeadsModule } from './leads/leads.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './core/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
+import { reducers, metaReducers } from './store';
+import { CustomersEffects } from './store/effects/customers.effects';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,6 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    StoreModule.forRoot({}),
     EffectsModule.forRoot(),
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     ReactiveFormsModule,
@@ -44,6 +45,8 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot({
       positionClass: 'toast-top-center'
     }),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

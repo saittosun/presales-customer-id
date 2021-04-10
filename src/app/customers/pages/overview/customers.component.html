@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let customer of customers" routerLink="customer-detail/{{customer.id}}">
+      <tr *ngFor="let customer of (customers$ | async)" routerLink="customer-detail/{{customer.id}}">
         <td>{{customer.customername}}</td>
         <td>{{customer.projectname}}</td>
         <td>{{customer.address.addressline1}}</td>

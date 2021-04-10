@@ -21,8 +21,8 @@ import { LeadsOverviewPageComponent } from './pages/overview/leads-overview-page
   imports: [
     CommonModule,
     LeadsRoutingModule,
-    StoreModule.forFeature('leads', leadReducers),
-    EffectsModule.forFeature([LeadEffects]),
+    // StoreModule.forFeature('leads', leadReducers),
+    // EffectsModule.forFeature([LeadEffects]),
     SharedModule,
     MatTableModule,
     MatPaginatorModule,

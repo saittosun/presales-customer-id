@@ -22,8 +22,8 @@ import { MatSortModule } from '@angular/material/sort';
   imports: [
     CommonModule,
     CustomersRoutingModule,
-    StoreModule.forFeature('customers', customerReducers),
-    EffectsModule.forFeature([CustomerEffects]),
+    // StoreModule.forFeature('customers', customerReducers),
+    // EffectsModule.forFeature([CustomerEffects]),
     SharedModule,
     MatTableModule,
     MatPaginatorModule,

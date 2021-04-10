@@ -127,6 +127,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "lead-follow-up"
+    }
+  },
+  "defaultProject": "lead-follow-up",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
