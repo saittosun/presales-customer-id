@@ -18,6 +18,4 @@ export const reducers: ActionReducerMap<AppState> = {
 
   [fromCustomers.customersFeatureKey]: fromCustomers.reducer,
 };
-
-
 export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [] : [];
